@@ -6,13 +6,15 @@ public class SignInFailureSteps {
 
     SignInPage signInPage = new SignInPage();
 
-    public void submitRegEmail(String email) {
-        signInPage.inputEmailRegField(email);
+    public void submitRegistrationEmail(String email) {
+        signInPage.clearEmailField();
+        signInPage.inputValueIntoRegisteredEmailField(email);
         signInPage.clickButtonSignInSubmit();
     }
 
-    public void submitRegPassword(String password) {
-        signInPage.inputPasswordRegField(password);
+    public void submitRegistrationPassword(String password) {
+        signInPage.clearPasswordField();
+        signInPage.inputValueIntoRegisteredPasswordField(password);
         signInPage.clickButtonSignInSubmit();
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="article_tests">
+    <test verbose="2" name="ArticleManagement">
+        <classes>
+            <class name="Tests.ArticleTest">
+                <methods>
+                    <include name="testUserIsAbleToOpenArticles"/>
+                    <include name="testUserCanOpenArticlesOnTopicPages"/>
+                    <include name="testUserCanOpenSavedArticle"/>
+                    <include name="testUserCanRemoveSavedArticle"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

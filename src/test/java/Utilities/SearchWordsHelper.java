@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class SearchWordsHelper {
 
-    private static final String FILE_PATH = "src/test/resources/search_words.txt";
+    private static final String FILE_PATH = Paths.get(System.getProperty("user.dir"), "src", "test", "resources", "search_words.txt").toString();
 
     // Method to fetch a random word from the txt file for search functionality
     public static String getRandomSearchWord() {

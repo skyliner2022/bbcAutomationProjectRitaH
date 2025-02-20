@@ -13,6 +13,9 @@ target/
 *.ipr
 .idea/
 
+### Ignore Log4j2 logs ###
+logs/test-results.log
+
 ### Eclipse ###
 .apt_generated
 .classpath

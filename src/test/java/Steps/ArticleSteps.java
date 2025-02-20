@@ -16,7 +16,7 @@ public class ArticleSteps {
     ArticlePage articlePage = new ArticlePage();
 
     public void navigateToArticleSections() {
-        HeaderNavigationPage.clickRandomArticlesLink(headerNavigationPage.getHeaderMenuOptions());
+        HeaderNavigationPage.clickHeaderNavigationOptions(headerNavigationPage.getHeaderMenuOptions());
     }
 
     public void navigateToSportPage() {
@@ -28,22 +28,22 @@ public class ArticleSteps {
         ArticlePage.scrollToElement(driver, element);
     }
 
-    public static void userIsLoggedIn(String email, String password) {
-        signInSuccessSteps.signInSuccessSignIn(email, password);
+    public static void logInWithValidCredentials(String email, String password) {
+        signInSuccessSteps.signInSuccessfullyFromSignInPage(email, password);
     }
 
-    public void accountMenuIsOpen() {
+    public void verifyAccountMenuIsOpen() {
         ValidationHelper.clickElement(signInPage.getUserAccountButton());
         ValidationHelper.isElementDisplayed(articlePage.getSavedArticlesLink());
     }
 
-    public void articleIsSaved(WebDriver driver) {
+    public void saveArticleToSavedArticlesPage(WebDriver driver) {
         BaseTest.waitForPageToLoadGlobal(driver, 10);
-        WebElement randomArticle = ValidationHelper.getRandomElement(articlePage.getArticleWithSaveFunctionality());
+        WebElement randomArticle = ValidationHelper.getRandomElement(articlePage.getInternalLinks());
         ValidationHelper.clickElement(randomArticle);
         ValidationHelper.isElementDisplayed(articlePage.getButtonSaveArticle());
         articlePage.clickButtonSaveArticle();
-        accountMenuIsOpen();
+        verifyAccountMenuIsOpen();
         articlePage.clickSavedArticlesLink();
         BaseTest.waitForPageToLoadGlobal(driver, 10);
     }
