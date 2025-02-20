@@ -60,29 +60,40 @@ public abstract class BaseTest {
 
     SignOutSteps signOutSteps;
 
-    @BeforeClass
     @SneakyThrows
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         properties = new Properties();
         try (BufferedReader reader = new BufferedReader(new FileReader("config.properties"))) {
             properties.load(reader);
             File file = new File(properties.getProperty("path"));
-            String driverName = properties.getProperty("driver");
+            String driverName = properties.getProperty("driver", "").toLowerCase();
+            String browserName = driverName.contains("chrome") ? "chrome" :
+                    driverName.contains("firefox") ? "firefox" : "";
+
+            if (browserName.isEmpty()) {
+                throw new IllegalArgumentException("Unsupported driver: " + driverName);
+            }
+
             System.setProperty(driverName, file.getAbsolutePath());
 
-
-            if (driverName.contains("chrome")) {
-                driver = new ChromeDriver();
-            } else if (driverName.contains("firefox")) {
-                driver = new FirefoxDriver();
+            switch (browserName) {
+                case "chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "firefox":
+                    driver = new FirefoxDriver();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported driver: " + browserName);
             }
+
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().window().maximize();
 
             wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         }
-
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
 
         signInPage = new SignInPage();
         signInSuccessSteps = new SignInSuccessSteps();
@@ -101,7 +112,10 @@ public abstract class BaseTest {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        clearBrowserData();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     private static final Logger logger = LogManager.getLogger(BaseTest.class);
@@ -147,9 +161,16 @@ public abstract class BaseTest {
         ((JavascriptExecutor) driver).executeScript("document.querySelectorAll(\"div[data-component='ad-slot']\").forEach(el => el.remove());");
     }
 
+    //Global method to clear storage and cookies
+    public void clearBrowserData() {
+        driver.manage().deleteAllCookies(); // Clears cookies
+        ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();"); // Clears localStorage
+        ((JavascriptExecutor) driver).executeScript("window.sessionStorage.clear();"); // Clears sessionStorage
+    }
+
     @DataProvider(name = "signUpDataValid")
     public Object[][] signUpDataValid() {
-        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.randomPassword(), "1", "12", "1988"}};
+        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.generateRandomPassword(8, true, true, true), "1", "12", "1988"}};
     }
 
     @DataProvider(name = "signUpPasswordEmpty")
@@ -189,12 +210,12 @@ public abstract class BaseTest {
 
     @DataProvider(name = "signInDefaultUserInvalidPassword")
     public Object[][] signInDefaultUserInvalidPassword() {
-        return new Object[][]{{"test244@gmail.com", RandomDataGenerator.randomPassword()}};
+        return new Object[][]{{"test244@gmail.com", RandomDataGenerator.generateRandomPassword(8, true, true, true)}};
     }
 
     @DataProvider(name = "signInDefaultUserInvalidSixthPassword")
     public Object[][] signInDefaultUserInvalidSixthPassword() {
-        return new Object[][]{{"forblocktest@gmail.com", RandomDataGenerator.randomPassword()}};
+        return new Object[][]{{"forblocktest@gmail.com", RandomDataGenerator.generateRandomPassword(8, true, true, true)}};
     }
 
     @DataProvider(name = "signInDefaultUserEmptyPassword")
@@ -209,17 +230,17 @@ public abstract class BaseTest {
 
     @DataProvider(name = "signUpSevenLengthPassword")
     public Object[][] signUpSevenLengthPassword() {
-        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.randomSevenLengthPassword()}};
+        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.generateRandomPassword(7, true, false, false)}};
     }
 
     @DataProvider(name = "signUpNoLetterPassword")
     public Object[][] signUpNoLetterPassword() {
-        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.randomNoLetterPassword()}};
+        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.generateRandomPassword(8, false, true, true)}};
     }
 
-    @DataProvider(name = "signUpNoCharactersAndNumbersPassword")
-    public Object[][] signUpNoNoCharactersAndNumbersPassword() {
-        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.randomNoCharactersAndNumbersPassword()}};
+    @DataProvider(name = "signUpNoSpecialCharactersAndNumbersPassword")
+    public Object[][] signUpNoSpecialCharactersAndNumbersPassword() {
+        return new Object[][]{{RandomDataGenerator.randomEmail(), RandomDataGenerator.generateRandomPassword(8, true, false, false)}};
     }
 
     @DataProvider(name = "randomSearchWord")

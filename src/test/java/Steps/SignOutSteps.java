@@ -10,16 +10,16 @@ public class SignOutSteps {
     static SignInPage signInPage = new SignInPage();
     SignOutPage signOutPage = new SignOutPage();
 
-    public void verifyUserIsLoggedIn(String email, String password) {
-        signInSuccessSteps.signInSuccessSignIn(email, password);
+    public void logInWithValidCredentials(String email, String password) {
+        signInSuccessSteps.signInSuccessfullyFromSignInPage(email, password);
     }
 
-    public void accountMenuIsClicked() {
+    public void openAccountMenu() {
         ValidationHelper.clickElement(signInPage.getUserAccountButton());
         ValidationHelper.assertElementDisplayed(signOutPage.getButtonSignOut(), "Sign out button should be visible");
     }
 
-    public void userIsSignedOut() {
+    public void signOutFromAccount() {
         ValidationHelper.clickElement(signInPage.getUserAccountButton());
         ValidationHelper.assertElementDisplayed(signOutPage.getButtonSignOut(), "Sign out button should be visible");
         signOutPage.clickButtonSignOut();

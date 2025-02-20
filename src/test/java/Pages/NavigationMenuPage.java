@@ -1,15 +1,11 @@
 package Pages;
 
 import lombok.Getter;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class NavigationMenuPage extends BasePage {
 
@@ -20,11 +16,11 @@ public class NavigationMenuPage extends BasePage {
     WebElement buttonCloseMenu;
 
     @Getter
-    @FindBy(xpath = "//div[contains(@class, 'fzfGDW')]")
+    @FindBy(xpath = "//div[@data-testid='drawer-background']")
     WebElement leftHandMenu;
 
     @FindBy(css = "[data-testid='search-input-field']")
-    WebElement searchInputField;
+    WebElement searchField;
 
     @FindBy(xpath = "//button[@data-testid='search-input-search-button']")
     WebElement buttonSearchSubmit;
@@ -46,16 +42,16 @@ public class NavigationMenuPage extends BasePage {
     List<WebElement> buttonLevelTwoSubOptions;
 
     @Getter
-    @FindBy(xpath = "//*[contains(@class, 'jZSdZm')]")
+    @FindBy(xpath = "//div[contains(@data-testid, 'navigationPanel-navItem-level1')]//a[@data-testid='internal-link']")
     List<WebElement> levelOneSubOptionLinks;
 
     @Getter
     @FindBy(xpath = "//button[@data-testid='level0NavButton-/news']")
-    WebElement menuOptionNews;
+    WebElement menuOptionNewsLeftMenu;
 
     @Getter
     @FindBy(xpath = "//button[contains(@data-testid, '/news/uk')]")
-    WebElement subMenuOptionLevelOneWithSubMenu;
+    WebElement subMenuOptionLevelOneWithSubOptions;
 
     @Getter
     @FindBy(xpath = "//iframe[contains(@id, 'google_ads_iframe')]")
@@ -69,8 +65,8 @@ public class NavigationMenuPage extends BasePage {
         buttonCloseMenu.click();
     }
 
-    public void inputValueSearchInputField(String word) {
-        searchInputField.sendKeys(word);
+    public void inputValueIntoSearchField(String word) {
+        searchField.sendKeys(word);
     }
 
     public void clickSearchSubmit() {
@@ -81,22 +77,25 @@ public class NavigationMenuPage extends BasePage {
         buttonHomeLeftMenu.click();
     }
 
-    public void clickMenuOptionNews() {
-        menuOptionNews.click();
+    public void clickMenuOptionNewsMenu() {
+        menuOptionNewsLeftMenu.click();
     }
 
-    public void clickSubMenuOptionLevelOneWithSubMenu() {
-        subMenuOptionLevelOneWithSubMenu.click();
+    public void clickSubMenuOptionLevelOneWithSubOptions() {
+        subMenuOptionLevelOneWithSubOptions.click();
     }
 
-    //Method to click left hand menu options having level 1 sub options
+    /*
+    This method targets all options from the left-hand menu that have sub-options
+    This method is used specifically for the test checking sub-options navigation
+    */
     public void clickRandomMenuOptionWithSubOptionLevelOne(List<WebElement> elements) {
         List<String> allowedOptions = Arrays.asList("Business", "Innovation", "Culture", "Arts", "Travel", "Earth");
 
         List<WebElement> filteredElements = elements.stream().filter(element -> allowedOptions.contains(element.getText().trim())).toList();
 
         if (filteredElements.isEmpty()) {
-            throw new RuntimeException("No valid links found in the given elements");
+            throw new RuntimeException("No valid links are found in the given elements");
         }
 
         Random random = new Random();
@@ -106,9 +105,11 @@ public class NavigationMenuPage extends BasePage {
     }
 
     //NOTE: Uncomment this method to remove iframe overlaying the entire page if issue arises
-    /*public void removeGoogleAdsIframeFromDOM(WebDriver driver, WebElement googleAdsIframe) {
+    /*
+    public void removeGoogleAdsIframeFromDOM(WebDriver driver, WebElement googleAdsIframe) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].remove();", googleAdsIframe);
-    }*/
+    }
+    */
 
 }

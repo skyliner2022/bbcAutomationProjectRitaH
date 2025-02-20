@@ -7,40 +7,35 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
 public class ArticlePage extends BasePage {
 
     @Getter
-    @FindBy(xpath = "//a[@data-testid='internal-link']")
+    @FindBy(xpath = "//a[@data-testid='internal-link' and .//div[contains(@data-testid, '-article')]]")
     List<WebElement> internalLinks;
 
     @Getter
-    @FindBy(css = ".ssrcss-zmz0hi-PromoLink.exn3ah91")
+    @FindBy(xpath = "//div[@data-testid='promo']//a")
     List<WebElement> sportArticles;
 
     @Getter
-    @FindBy(css = "h2.dhclWg")
-    List<WebElement> articleWithSaveFunctionality;
-
-    @Getter
-    @FindBy(xpath = "//button[@type='button' and @data-testid='saveButton']")
+    @FindBy(xpath = "//button[@data-testid='saveButton']")
     WebElement buttonSaveArticle;
 
     @Getter
-    @FindBy(xpath = "//button[@type='button' and @data-testid='wrexham-remove-button']")
+    @FindBy(xpath = "//button[@data-testid='wrexham-remove-button']")
     List<WebElement> buttonRemoveSavedArticle;
 
     @Getter
     @FindBy(xpath = "//div[@data-testid='popoverStyled']")
     WebElement articleRegisterSignInModal;
 
-    @FindBy(xpath = "//button[@type='button' and @aria-label='Sign In']")
+    @FindBy(xpath = "//div[@data-testid='popoverStyled']//button[@aria-label='Sign In']")
     WebElement articleSignInButton;
 
-    @FindBy(xpath = "//button[@type='button' and @aria-label='Register']")
+    @FindBy(xpath = "//div[@data-testid='popoverStyled']//button[@aria-label='Register']")
     WebElement articleRegisterButton;
 
     @Getter
@@ -48,7 +43,7 @@ public class ArticlePage extends BasePage {
     WebElement savedArticlesLink;
 
     @Getter
-    @FindBy(tagName = "h1")
+    @FindBy(xpath = "//div[@data-component='headline-block']//h1")
     WebElement articleHeadline;
 
     @Getter
@@ -56,8 +51,8 @@ public class ArticlePage extends BasePage {
     WebElement savedArticleHeadline;
 
     @Getter
-    @FindBy(css = ".sc-8e61d307-3.gCEcex")
-    WebElement articleClearedValidationText;
+    @FindBy(xpath = "//h2[@data-testid='card-headline']")
+    WebElement savedArticleHeadingElement;
 
     public void clickButtonSaveArticle() {
         buttonSaveArticle.click();

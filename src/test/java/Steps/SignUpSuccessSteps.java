@@ -10,63 +10,63 @@ public class SignUpSuccessSteps {
     SignInPage signInPage = new SignInPage();
 
     @SneakyThrows
-    public void signUpSuccessSignUp(String email, String password, String day, String month, String year) {
+    public void signUpSuccessfullyFromSignUpPage(String email, String password, String day, String month, String year) {
         signUpPage.clickButtonOpenSignUp();
-        signUpPage.inputEmailSignUpField(email);
-        signUpPage.clickButtonSignUpSubmit();
-        signUpPage.inputPasswordSignUpField(password);
-        signUpPage.clickButtonSignUpSubmit();
-        signUpPage.inputDetailsDayBirthInput(day);
-        signUpPage.inputDetailsMonthBirthInput(month);
-        signUpPage.inputDetailsYearBirthInput(year);
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.inputValueIntoEmailFieldOnSignUpPage(email);
+        signUpPage.clickButtonSubmitOnSignUpPage();
+        signUpPage.inputValueIntoPasswordFieldOnSignUpPage(password);
+        signUpPage.clickButtonSubmitOnSignUpPage();
+        signUpPage.inputValueIntoDayOfBirthField(day);
+        signUpPage.inputValueIntoMonthOfBirthField(month);
+        signUpPage.inputValueIntoYearOfBirthField(year);
+        signUpPage.clickButtonSubmitOnSignUpPage();
         //Wait for the system to process the page update (No reliable wait condition found)
         Thread.sleep(500); //TODO: Replace with better waiting if possible
         signUpPage.waitForSubmitButtonToAppear();
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.clickButtonSubmitOnSignUpPage();
         signUpPage.clickNoThanksOption();
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.clickButtonSubmitOnSignUpPage();
         signInPage.waitForAccountButtonToAppear();
     }
 
     @SneakyThrows
-    public void signUpSuccessSignIn(String email, String password, String day, String month, String year) {
+    public void signUpSuccessfullyFromSignInPage(String email, String password, String day, String month, String year) {
         signInPage.clickButtonOpenSignIn();
         signInPage.clickLinkToSignUp();
-        signUpPage.inputEmailSignUpField(email);
-        signUpPage.clickButtonSignUpSubmit();
-        signUpPage.inputPasswordSignUpField(password);
-        signUpPage.clickButtonSignUpSubmit();
-        signUpPage.inputDetailsDayBirthInput(day);
-        signUpPage.inputDetailsMonthBirthInput(month);
-        signUpPage.inputDetailsYearBirthInput(year);
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.inputValueIntoEmailFieldOnSignUpPage(email);
+        signUpPage.clickButtonSubmitOnSignUpPage();
+        signUpPage.inputValueIntoPasswordFieldOnSignUpPage(password);
+        signUpPage.clickButtonSubmitOnSignUpPage();
+        signUpPage.inputValueIntoDayOfBirthField(day);
+        signUpPage.inputValueIntoMonthOfBirthField(month);
+        signUpPage.inputValueIntoYearOfBirthField(year);
+        signUpPage.clickButtonSubmitOnSignUpPage();
         //Wait for the system to process the page update (No reliable wait condition found)
         Thread.sleep(500); //TODO: Replace with better waiting if possible
         signUpPage.waitForSubmitButtonToAppear();
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.clickButtonSubmitOnSignUpPage();
         signUpPage.clickCloseButton();
         signInPage.waitForAccountButtonToAppear();
     }
 
     @SneakyThrows
-    public void signUpSuccessForgotEmail(String email, String password, String day, String month, String year) {
+    public void signUpSuccessfullyByForgotEmailLink(String email, String password, String day, String month, String year) {
         signInPage.clickButtonOpenSignIn();
         signInPage.clickLinkForgottenEmail();
         signInPage.waitForButtonRegisterNewAccountToAppear();
         signInPage.clickButtonRegisterNewAccount();
-        signUpPage.inputEmailSignUpField(email);
-        signUpPage.clickButtonSignUpSubmit();
-        signUpPage.inputPasswordSignUpField(password);
-        signUpPage.clickButtonSignUpSubmit();
-        signUpPage.inputDetailsDayBirthInput(day);
-        signUpPage.inputDetailsMonthBirthInput(month);
-        signUpPage.inputDetailsYearBirthInput(year);
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.inputValueIntoEmailFieldOnSignUpPage(email);
+        signUpPage.clickButtonSubmitOnSignUpPage();
+        signUpPage.inputValueIntoPasswordFieldOnSignUpPage(password);
+        signUpPage.clickButtonSubmitOnSignUpPage();
+        signUpPage.inputValueIntoDayOfBirthField(day);
+        signUpPage.inputValueIntoMonthOfBirthField(month);
+        signUpPage.inputValueIntoYearOfBirthField(year);
+        signUpPage.clickButtonSubmitOnSignUpPage();
         //Wait for the system to process the page update (No reliable wait condition found)
         Thread.sleep(500); //TODO: Replace with better waiting if possible
         signUpPage.waitForSubmitButtonToAppear();
-        signUpPage.clickButtonSignUpSubmit();
+        signUpPage.clickButtonSubmitOnSignUpPage();
         signUpPage.clickCloseButton();
         signInPage.waitForAccountButtonToAppear();
     }

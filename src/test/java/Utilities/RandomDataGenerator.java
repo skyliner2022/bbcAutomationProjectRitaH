@@ -5,74 +5,40 @@ import net.datafaker.Faker;
 import java.util.Random;
 
 public class RandomDataGenerator {
-    // Generates a password that meets the following criteria:
-    // - At least 8 characters
-    // - Contains at least one letter
-    // - Contains at least one number or symbol
-    public static String randomPassword() {
-        Random random = new Random();
+    /*
+    Generates a password that meets the following criteria:
+    - At least 8 characters
+    - Contains at least one letter
+    - Contains at least one number or symbol
+    */
 
-        String letters = "abcdefghijklmnopqrstuvwxyz";
-        String numbersAndSymbols = "0123456789!@#$%^&*";
-        String fullPassword = letters + numbersAndSymbols;
-
-        StringBuilder password = new StringBuilder();
-        password.append(letters.charAt(random.nextInt(letters.length())));
-        password.append(numbersAndSymbols.charAt(random.nextInt(numbersAndSymbols.length())));
-
-        for (int i = 2; i < 8; i++) {
-            password.append(fullPassword.charAt(random.nextInt(fullPassword.length())));
-        }
-
-        return password.toString();
-    }
-
-    //Generates password having length less than 8
-    public static String randomSevenLengthPassword() {
-        Random random = new Random();
-
-        String letters = "abcdefghijklmnopqrstuvwxyz";
-        String numbersAndSymbols = "0123456789!@#$%^&*";
-        String fullPassword = letters + numbersAndSymbols;
-
-        StringBuilder password = new StringBuilder();
-        password.append(letters.charAt(random.nextInt(letters.length())));
-        password.append(numbersAndSymbols.charAt(random.nextInt(numbersAndSymbols.length())));
-
-        for (int i = 2; i < 7; i++) {
-            password.append(fullPassword.charAt(random.nextInt(fullPassword.length())));
-        }
-
-        return password.toString();
-    }
-
-    //Generates password having no letters
-    public static String randomNoLetterPassword() {
-        Random random = new Random();
-
-        String numbersAndSymbols = "0123456789!@#$%^&*";
-
-        StringBuilder password = new StringBuilder();
-        password.append(numbersAndSymbols.charAt(random.nextInt(numbersAndSymbols.length())));
-
-        for (int i = 1; i < 8; i++) {
-            password.append(numbersAndSymbols.charAt(random.nextInt(numbersAndSymbols.length())));
-        }
-
-        return password.toString();
-    }
-
-    //Generates password having no special characters and numbers
-    public static String randomNoCharactersAndNumbersPassword() {
-        Random random = new Random();
+    public static String generateRandomPassword(int length, boolean includeLetters, boolean includeNumbers, boolean includeSpecialChars) {
+        length = Math.max(length, 1); //Ensures length is at least 1
 
         String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numbers = "0123456789";
+        String specialChars = "!@#$%^&*";
 
-        StringBuilder password = new StringBuilder();
-        password.append(letters.charAt(random.nextInt(letters.length())));
+        StringBuilder characterPool = new StringBuilder();
+        if (includeLetters) {
+            characterPool.append(letters);
+        }
+        if (includeNumbers) {
+            characterPool.append(numbers);
+        }
+        if (includeSpecialChars) {
+            characterPool.append(specialChars);
+        }
 
-        for (int i = 1; i < 8; i++) {
-            password.append(letters.charAt(random.nextInt(letters.length())));
+        if (characterPool.isEmpty()) {
+            throw new IllegalArgumentException("At least one character type must be included.");
+        }
+
+        Random random = new Random();
+        StringBuilder password = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            password.append(characterPool.charAt(random.nextInt(characterPool.length())));
         }
 
         return password.toString();

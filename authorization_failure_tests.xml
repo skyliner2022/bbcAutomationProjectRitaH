@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="authorization_failure_tests">
+    <test verbose="2" name="AuthFailureTests">
+        <classes>
+            <class name="Tests.SignInFailureTest">
+                <methods>
+                    <include name="testUserCannotProceedToPasswordWithUnregisteredEmail"/>
+                    <include name="testUserCannotProceedToPasswordEmptyEmailField"/>
+                    <include name="testUserCannotProceedToPasswordIfEmailIsInvalidFormat"/>
+                    <include name="testUserCannotSignInWithInvalidRegisteredPassword"/>
+                    <include name="testUserCannotCompleteSignInWithEmptyPasswordField"/>
+                    <include name="testAccountLocksAfterSixFailedAttempts"/>
+                    <include name="testUserCannotLogInIfRegistrationIsNotComplete"/>
+                </methods>
+            </class>
+            <class name="Tests.SignUpFailureTest">
+                <methods>
+                    <include name="testUserCannotProceedToPasswordWithRegisteredEmailOnSignUpPage"/>
+                    <include name="testUserCannotProceedToPasswordIfEmailIsInvalidFormat"/>
+                    <include name="testUserCannotProceedToPasswordWithEmptyEmailField"/>
+                    <include name="testUserCannotCompleteSignUpWithEmptyPasswordField"/>
+                    <include name="testUserCannotCompleteSignInIfPasswordLengthIsSeven"/>
+                    <include name="testUserCannotCompleteSignInIfPasswordHasNoLetter"/>
+                    <include name="testUserCannotCompleteSignInIfPasswordHasNoCharactersAndNumbers"/>
+                    <include name="testValidationMessageIfPasswordIsCompromised"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

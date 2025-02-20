@@ -7,7 +7,7 @@ public class NavigationMenuSteps {
 
     NavigationMenuPage navigationMenuPage = new NavigationMenuPage();
 
-    public void openMenuAndCheckDisplay() {
+    public void openMenuAndCheckItsDisplay() {
         navigationMenuPage.clickButtonOpenMenu();
         ValidationHelper.isElementDisplayed(navigationMenuPage.getLeftHandMenu());
     }
