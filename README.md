@@ -13,7 +13,7 @@ key functionalities such as login, navigation, and article interactions.
 - Selenium WebDriver
 - TestNG
 - Maven 3 (Built-in)
-- Logging log4j
+- Allure
 
 ## 🔧 Prerequisites
 
@@ -23,15 +23,21 @@ key functionalities such as login, navigation, and article interactions.
       java -version
       ```
 2. **Set up Maven 3** (for dependency management)
-    - For this project Intellij Idea built-in Maven 3 is used
+    - For this project, Intellij Idea built-in Maven 3 is used
     - Can be installed separately but this needs additional set up
     - Reference: https://www.jetbrains.com/help/idea/maven-support.html
 3. **Set up WebDrivers**
-    - Download chromedriver files.
-    - Place `chromedriver.exe` in the project folder.
-    - Update `webdriver.chrome.driver` path in `config.properties`.
-4. **Additional set-ups**
+    - Download chromedriver and geckodriver files.
+    - Place `chromedriver.exe` and `geckodriver.exe` in the project folder on your device.
+    - Update `webdriver.chrome.driver` and `geckodriver.exe` path in `config.properties`.
+    - Select driver in `config.properties` which will be run for your tests by uncommenting configs
+4. **Other necessary set-ups**
     - Verify all the dependencies are properly set-up in pom.xml file.
+    - Install 'Lombok', 'Create TestNG XML', 'Allure Reports' plugins
+    - Instead of 'Allure Reports' plugin, you can install Allure CLI using homebrew or any other available method
+      ```sh
+      brew install allure
+      ```
 
 ## 📂 Project Structure
 
@@ -41,7 +47,9 @@ key functionalities such as login, navigation, and article interactions.
 - src/ # Main source code
 - test/ # Test scripts
 - resources/ # Config files, test data
-- config.properties/ # WebDrivers (ChromeDriver) set-up
+- target/ #allure-results file for Allure reports
+- config.properties/ # WebDrivers set-up
+- allure.properties/ # Allure reporting set-up
 - pom.xml # Maven dependencies
 - README.md # Project documentation
 - .gitignore # Git ignored files
@@ -51,6 +59,33 @@ key functionalities such as login, navigation, and article interactions.
 - You can run tests directly from test classes
 - You can run tests using testng.xml
 
+## 🚀 How to Visualise Allure Reports
+
+If you have an Allure plugin installed:
+- Run test/tests
+- To generate report: right-click on the 'allure-results' folder found in 'target' folder -> Allure -> Generate
+- To open report: right-click on the 'allure-results' folder found in 'target' folder -> Allure -> Serve
+- Alternative to open report: right-click on the 'allure-report' folder found in 'target' folder -> Allure -> Open
+
+If you have Allure CLI installed:
+- Open Terminal
+- Check if CLI is installed
+  ```sh
+  allure --version
+  ```
+- Generate Allure report
+  ```sh
+  allure generate target/allure-results --clean
+  ```
+- Serve Allure report (opens Allure UI in browser)
+  ```sh
+  allure serve target/allure-results
+  ```
+- Clear results and report if needed
+  ```sh
+  rm -rf target/allure-results target/allure-report
+  ```
+
 ## **📊 Where can users find test logs?**
 
 **📄 Test Logs**
@@ -58,6 +93,7 @@ key functionalities such as login, navigation, and article interactions.
 After test execution, reports are generated in:
 
 - **log4j** → `logs/test-results.log`
+- **Allure** → `target/allure-results`
 
 ## ⚙️ Configuration
 
@@ -66,9 +102,13 @@ WebDriver properties are contained in `config.properties`. Basic WebDriver confi
 ## 🐞 Troubleshooting
 ❌ **Issue:** WebDriver on macbook may not run  
 ✅ **Solution:**
-- Ensure ChromeDriver has appropriate permissions set in System Preferences -> Security.
+- Ensure webdrivers have appropriate permissions set in System Preferences -> Security.
 
 ❌ **Issue:** Built-in Maven 3 may not process builds  
 ✅ **Solution:**
 - Ensure Maven 3 has necessary resources to run. Right-click on the pom.xml -> Maven ->
   Download resources. Then sync Project.
+
+❌ **Issue:** Maven dependencies are failing to load  
+✅ **Solution:**
+- Ensure all dependencies are fetched. Right-click on the pom.xml -> Maven -> Sync Project.

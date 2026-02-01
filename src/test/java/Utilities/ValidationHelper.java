@@ -1,12 +1,7 @@
 package Utilities;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,16 +38,6 @@ public class ValidationHelper {
     //Generic method to extract text from elements
     public static String getText(WebElement elementText) {
         return elementText.getText();
-    }
-
-    //Generic method to extract element text of an array of elements
-    public static String getTextFromRandomElement(List<WebElement> elements) {
-        if (elements.isEmpty()) {
-            throw new RuntimeException("No options found with the specified locator");
-        }
-        Random random = new Random();
-        WebElement randomIndex = elements.get(random.nextInt(elements.size()));
-        return randomIndex.getText();
     }
 
     //Generic method to click element

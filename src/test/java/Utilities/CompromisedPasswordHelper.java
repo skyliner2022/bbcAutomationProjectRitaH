@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class CompromisedPasswordHelper {
 
-    private static final String FILE_PATH = "src/test/resources/compromised_passwords.txt";
+    private static final String FILE_PATH = Paths.get(System.getProperty("user.dir"), "src", "test", "resources", "compromised_passwords.txt").toString();
 
     // Method to fetch a random password from the txt file for dataProvider returning a compromised password
     public static String getRandomCompromisedPassword() {

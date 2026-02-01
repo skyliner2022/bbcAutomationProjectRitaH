@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="smoke_tests">
+    <test verbose="2" name="SmokeTests">
+        <classes>
+            <class name="Tests.SignInSuccessTest">
+                <methods>
+                    <include name="testSignInWithValidCredentialsOnSignInPage"/>
+                </methods>
+            </class>
+            <class name="Tests.SignUpSuccessTest">
+                <methods>
+                    <include name="testSignUpWithValidCredentialsOnSignInPageAndSkipSubscriptionFrom"/>
+                </methods>
+            </class>
+            <class name="Tests.ArticleTest">
+                <methods>
+                    <include name="testUserIsAbleToOpenArticles"/>
+                </methods>
+            </class>
+            <class name="Tests.HeaderNavigationTest">
+                <methods>
+                    <include name="testHeaderNavigationLinks"/>
+                </methods>
+            </class>
+            <class name="Tests.NavigationMenuTest">
+                <methods>
+                    <include name="testLeftHandMenuOptionNavigatesToPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

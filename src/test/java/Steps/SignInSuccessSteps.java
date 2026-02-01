@@ -8,21 +8,21 @@ public class SignInSuccessSteps {
     SignInPage signInPage = new SignInPage();
     SignUpPage signUpPage = new SignUpPage();
 
-    public void signInSuccessSignIn(String email, String password) {
+    public void signInSuccessfullyFromSignInPage(String email, String password) {
         signInPage.clickButtonOpenSignIn();
-        signInPage.inputEmailRegField(email);
+        signInPage.inputValueIntoRegisteredEmailField(email);
         signInPage.clickButtonSignInSubmit();
-        signInPage.inputPasswordRegField(password);
+        signInPage.inputValueIntoRegisteredPasswordField(password);
         signInPage.clickButtonSignInSubmit();
         signInPage.waitForAccountButtonToAppear();
     }
 
-    public void signInSuccessSignUp(String email, String password) {
+    public void signInSuccessfullyFromSignUpPage(String email, String password) {
         signUpPage.clickButtonOpenSignUp();
-        signUpPage.clickLinkToSignIn();
-        signInPage.inputEmailRegField(email);
+        signUpPage.clickLinkToSignInOnSignUpPage();
+        signInPage.inputValueIntoRegisteredEmailField(email);
         signInPage.clickButtonSignInSubmit();
-        signInPage.inputPasswordRegField(password);
+        signInPage.inputValueIntoRegisteredPasswordField(password);
         signInPage.clickButtonSignInSubmit();
         signInPage.waitForAccountButtonToAppear();
     }

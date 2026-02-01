@@ -1,11 +1,11 @@
 package Pages;
 
 import lombok.Getter;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class SignInPage extends BasePage {
@@ -17,21 +17,21 @@ public class SignInPage extends BasePage {
     WebElement buttonOpenSignInSport;
 
     @FindBy(id = "user-identifier-input")
-    WebElement emailRegField;
+    WebElement registeredEmailField;
 
     @FindBy(id = "password-input")
-    WebElement passwordRegField;
+    WebElement registeredPasswordField;
 
     // The same locator is used for both 'Continue' and 'Sign In' buttons
     @FindBy(id = "submit-button")
     WebElement buttonSignInSubmit;
 
     @Getter
-    @FindBy(xpath = "//button[contains(@class, 'sc-5b3467da-7') and contains(@class, 'cWmBDI')]")
+    @FindBy(xpath = "//button[text()='Your Account']")
     WebElement userAccountButton;
 
     @Getter
-    @FindBy(xpath = "//span[contains(@class, 'e1jj8uav2') and text()='Your account']")
+    @FindBy(xpath = "//a[contains(@href, '/account')]")
     WebElement userAccountButtonSport;
 
     @Getter
@@ -51,11 +51,11 @@ public class SignInPage extends BasePage {
     WebElement errorContainerPassword;
 
     @Getter
-    @FindBy(xpath = "//h1//span[2]/span")
+    @FindBy(xpath = "//h1//span[text()='Enter your email']")
     WebElement enterYourEmailTitle;
 
     @Getter
-    @FindBy(xpath = "//main/h1/span")
+    @FindBy(xpath = "//h1//span[text()='Enter your password']")
     WebElement enterYourPasswordTitle;
 
     @Getter
@@ -63,7 +63,7 @@ public class SignInPage extends BasePage {
     WebElement lockedAccountTitle;
 
     @Getter
-    @FindBy(xpath = "//*[contains(@href, 'magicLink')]")
+    @FindBy(xpath = "//*[@data-bbc-title='magic-link-cta']")
     WebElement magicLinkRecoverAccount;
 
     @FindBy(xpath = "//a[contains(@data-bbc-result, '/register')]")
@@ -75,7 +75,7 @@ public class SignInPage extends BasePage {
     @FindBy(xpath = "//a[contains(@data-bbc-result, '/session/signout')]")
     WebElement buttonRegisterNewAccount;
 
-    @FindBy(xpath = "//*[@class='page__close']")
+    @FindBy(xpath = "//*[@data-bbc-title='close-button']")
     WebElement closeButtonSignIn;
 
     public void clickButtonOpenSignIn() {
@@ -86,12 +86,20 @@ public class SignInPage extends BasePage {
         buttonOpenSignInSport.click();
     }
 
-    public void inputEmailRegField(String email) {
-        emailRegField.sendKeys(email);
+    public void inputValueIntoRegisteredEmailField(String email) {
+        registeredEmailField.sendKeys(email);
     }
 
-    public void inputPasswordRegField(String password) {
-        passwordRegField.sendKeys(password);
+    public void inputValueIntoRegisteredPasswordField(String password) {
+        registeredPasswordField.sendKeys(password);
+    }
+
+    public void clearPasswordField() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='';", registeredPasswordField);
+    }
+
+    public void clearEmailField() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='';", registeredEmailField);
     }
 
     public void clickButtonSignInSubmit() {

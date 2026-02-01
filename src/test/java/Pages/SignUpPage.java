@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class SignUpPage extends BasePage {
@@ -23,7 +22,7 @@ public class SignUpPage extends BasePage {
     @FindBy(id = "submit-button")
     WebElement buttonSignUpSubmit;
 
-    @FindBy(xpath = "//a[contains(@class, 'sb-link') and contains(@class, 'sb-link--secondary')]")
+    @FindBy(xpath = "//a[@data-bbc-result='/auth']")
     WebElement linkToSignIn;
 
     @Getter
@@ -59,11 +58,11 @@ public class SignUpPage extends BasePage {
     WebElement symbolNumberRequirement;
 
     @Getter
-    @FindBy(css = ".sc-fQpRED.jLxIKE.checklist__item")
+    @FindBy(css = ".checklist__item")
     WebElement uncheckedClassValue;
 
     @Getter
-    @FindBy(css = ".sc-fQpRED.jLxIKE.checklist__item.checklist-item--checked")
+    @FindBy(css = ".checklist__item.checklist-item--checked")
     WebElement checkedClassValue;
 
     @Getter
@@ -73,9 +72,6 @@ public class SignUpPage extends BasePage {
     @Getter
     @FindBy(xpath = "//*[@id='form-message-password']/p/span/span")
     WebElement passwordCompromisedErrorMessage;
-
-    @FindBy(css = "button[type='button']")
-    WebElement buttonShowPassword;
 
     @Getter
     @FindBy(xpath = "//h1/span[text()='Enter Your Details']")
@@ -90,45 +86,41 @@ public class SignUpPage extends BasePage {
     @FindBy(id = "dateOfBirthYear")
     WebElement detailsYearBirthInput;
 
-    @FindBy(xpath = "(//div[contains(@class, 'button--radio')])[2]")
+    @FindBy(xpath = "//label[@for='optOut']")
     WebElement noThanksOption;
 
-    @FindBy(xpath = "//*[@class='page__close']")
+    @FindBy(xpath = "//*[@data-bbc-title='close-button']")
     WebElement closeButton;
-
-    public void clickButtonShowPassword() {
-        buttonShowPassword.click();
-    }
 
     public void clickButtonOpenSignUp() {
         buttonOpenSignUp.click();
     }
 
-    public void inputEmailSignUpField(String email) {
+    public void inputValueIntoEmailFieldOnSignUpPage(String email) {
         emailSignUpField.sendKeys(email);
     }
 
-    public void inputPasswordSignUpField(String password) {
+    public void inputValueIntoPasswordFieldOnSignUpPage(String password) {
         passwordSignUpField.sendKeys(password);
     }
 
-    public void clickButtonSignUpSubmit() {
+    public void clickButtonSubmitOnSignUpPage() {
         buttonSignUpSubmit.click();
     }
 
-    public void clickLinkToSignIn() {
+    public void clickLinkToSignInOnSignUpPage() {
         linkToSignIn.click();
     }
 
-    public void inputDetailsDayBirthInput(String day) {
+    public void inputValueIntoDayOfBirthField(String day) {
         detailsDayBirthInput.sendKeys(day);
     }
 
-    public void inputDetailsMonthBirthInput(String month) {
+    public void inputValueIntoMonthOfBirthField(String month) {
         detailsMonthBirthInput.sendKeys(month);
     }
 
-    public void inputDetailsYearBirthInput(String year) {
+    public void inputValueIntoYearOfBirthField(String year) {
         detailsYearBirthInput.sendKeys(year);
     }
 

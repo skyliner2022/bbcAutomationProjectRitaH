@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="authorization_success_tests">
+    <test verbose="2" name="AuthSuccessTest">
+        <classes>
+            <class name="Tests.SignInSuccessTest">
+                <methods>
+                    <include name="testSignInWithValidCredentialsOnSignInPage"/>
+                    <include name="testSignInWithValidCredentialsOnSignUpPage"/>
+                    <include name="testSignInWithValidCredentialsOnSportPage"/>
+                </methods>
+            </class>
+            <class name="Tests.SignUpSuccessTest">
+                <methods>
+                    <include name="testSignUpWithValidCredentialsOnSignUpPageAndRefuseToSubscribe"/>
+                    <include name="testSignUpWithValidCredentialsOnSignInPageAndSkipSubscriptionFrom"/>
+                    <include name="testSignUpWithValidCredentialsViaForgotEmailLink"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

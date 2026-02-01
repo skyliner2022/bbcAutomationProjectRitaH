@@ -6,13 +6,13 @@ public class SignUpFailureSteps {
 
     SignUpPage signUpPage = new SignUpPage();
 
-    public void submitNewEmail(String email) {
-        signUpPage.inputEmailSignUpField(email);
-        signUpPage.clickButtonSignUpSubmit();
+    public void submitEmail(String email) {
+        signUpPage.inputValueIntoEmailFieldOnSignUpPage(email);
+        signUpPage.clickButtonSubmitOnSignUpPage();
     }
 
-    public void submitNewPassword(String password) {
-        signUpPage.inputPasswordSignUpField(password);
-        signUpPage.clickButtonSignUpSubmit();
+    public void submitPassword(String password) {
+        signUpPage.inputValueIntoPasswordFieldOnSignUpPage(password);
+        signUpPage.clickButtonSubmitOnSignUpPage();
     }
 }
